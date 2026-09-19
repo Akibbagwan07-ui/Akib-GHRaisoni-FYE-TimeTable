@@ -1,0 +1,7 @@
+{
+  "name": "G H Raisoni College Timetable Portal",
+  "description": "Official First Year Engineering (Semester-I, 2026-27) Master Timetable Portal for G H Raisoni College of Engineering and Management, Jalgaon.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
