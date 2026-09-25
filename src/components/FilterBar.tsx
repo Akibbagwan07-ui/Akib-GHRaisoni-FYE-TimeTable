@@ -1,6 +1,6 @@
 import React from 'react';
-import { ChevronDown, SlidersHorizontal, RotateCcw } from 'lucide-react';
-import { BRANCH_OPTIONS, CLUSTER_OPTIONS } from '../data';
+import { ChevronDown, SlidersHorizontal, RotateCcw, Info } from 'lucide-react';
+import { BRANCH_OPTIONS, CLUSTERS } from '../data';
 
 interface FilterBarProps {
   selectedBranch: string;
@@ -17,6 +17,21 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   onSelectCluster,
   isDarkMode,
 }) => {
+  const currentBranchInfo = BRANCH_OPTIONS.find((b) => b.code === selectedBranch);
+  const availableClusters = currentBranchInfo ? currentBranchInfo.clusters : [];
+
+  const handleBranchChange = (newBranch: string) => {
+    onSelectBranch(newBranch);
+    if (newBranch === 'ALL') {
+      onSelectCluster('ALL');
+    } else {
+      const nextBranchInfo = BRANCH_OPTIONS.find((b) => b.code === newBranch);
+      if (!nextBranchInfo || !nextBranchInfo.clusters.includes(selectedCluster)) {
+        onSelectCluster('ALL');
+      }
+    }
+  };
+
   const handleResetFilters = () => {
     onSelectBranch('ALL');
     onSelectCluster('ALL');
@@ -72,7 +87,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             <select
               id="branch-dropdown-select"
               value={selectedBranch}
-              onChange={(e) => onSelectBranch(e.target.value)}
+              onChange={(e) => handleBranchChange(e.target.value)}
               className={`w-full py-2.5 px-3.5 pr-9 rounded-xl text-sm font-medium border appearance-none transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-400/30 ${
                 isDarkMode
                   ? 'bg-neutral-950 border-neutral-700 text-white hover:border-neutral-600'
@@ -96,7 +111,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           </div>
         </div>
 
-        {/* 2. SELECT CLUSTER DROPDOWN (ONLY CLUSTERS) */}
+        {/* 2. SELECT CLUSTER DROPDOWN (DEPENDS ON SELECTED BRANCH) */}
         <div>
           <label
             htmlFor="cluster-dropdown-select"
@@ -110,28 +125,51 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             <select
               id="cluster-dropdown-select"
               value={selectedCluster}
+              disabled={selectedBranch === 'ALL'}
               onChange={(e) => onSelectCluster(e.target.value)}
               className={`w-full py-2.5 px-3.5 pr-9 rounded-xl text-sm font-medium border appearance-none transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-400/30 ${
-                isDarkMode
+                selectedBranch === 'ALL'
+                  ? isDarkMode
+                    ? 'bg-neutral-900/50 border-neutral-800 text-neutral-500 cursor-not-allowed'
+                    : 'bg-neutral-100 border-neutral-200 text-neutral-400 cursor-not-allowed'
+                  : isDarkMode
                   ? 'bg-neutral-950 border-neutral-700 text-white hover:border-neutral-600'
                   : 'bg-neutral-50 border-neutral-300 text-neutral-900 hover:border-neutral-400'
               }`}
             >
-              <option value="ALL" className={isDarkMode ? 'bg-neutral-950' : 'bg-white'}>
-                All Clusters
-              </option>
-              {CLUSTER_OPTIONS.map((cluster) => (
-                <option
-                  key={cluster}
-                  value={cluster}
-                  className={isDarkMode ? 'bg-neutral-950' : 'bg-white'}
-                >
-                  Cluster {cluster}
+              {selectedBranch === 'ALL' ? (
+                <option value="ALL" className={isDarkMode ? 'bg-neutral-950' : 'bg-white'}>
+                  Select a Branch first
                 </option>
-              ))}
+              ) : (
+                <>
+                  <option value="ALL" className={isDarkMode ? 'bg-neutral-950' : 'bg-white'}>
+                    All {selectedBranch} Clusters ({availableClusters.join(', ')})
+                  </option>
+                  {availableClusters.map((cluster) => {
+                    const clInfo = CLUSTERS.find((c) => c.cluster === cluster);
+                    const label = clInfo ? `Cluster ${cluster} (${clInfo.displayCode})` : `Cluster ${cluster}`;
+                    return (
+                      <option
+                        key={cluster}
+                        value={cluster}
+                        className={isDarkMode ? 'bg-neutral-950' : 'bg-white'}
+                      >
+                        {label}
+                      </option>
+                    );
+                  })}
+                </>
+              )}
             </select>
             <ChevronDown className="w-4 h-4 text-neutral-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
           </div>
+          {selectedBranch === 'ALL' && (
+            <p className="text-[11px] text-neutral-400 mt-1 flex items-center gap-1">
+              <Info className="w-3 h-3 text-yellow-400 shrink-0" />
+              <span>Choose a branch above to view its assigned clusters.</span>
+            </p>
+          )}
         </div>
       </div>
     </div>

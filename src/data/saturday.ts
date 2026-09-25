@@ -1,4 +1,13 @@
 import { TimetableEntry } from '../types';
+import { createEntry } from './parserHelper';
 
-// In the official Master Time Table 2026-27 (Semester-I), Saturday columns are blank (No scheduled lectures/labs).
-export const saturdayEntries: TimetableEntry[] = [];
+const ALL_CLUSTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'];
+
+export const saturdayEntries: TimetableEntry[] = ALL_CLUSTERS.map((cluster) =>
+  createEntry(
+    'Saturday',
+    cluster,
+    '09:45 TO 12:45',
+    'LLC Activity / Workshop / Expert Lecture / etc'
+  )
+);

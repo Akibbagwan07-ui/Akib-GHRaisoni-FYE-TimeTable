@@ -47,6 +47,18 @@ export default function App() {
   // Selected Cluster filter (defaults to 'ALL')
   const [selectedCluster, setSelectedCluster] = useState<string>('ALL');
 
+  const handleSelectBranch = (branch: string) => {
+    setSelectedBranch(branch);
+    if (branch === 'ALL') {
+      setSelectedCluster('ALL');
+    } else {
+      const branchInfo = BRANCH_OPTIONS.find((b) => b.code === branch);
+      if (!branchInfo || !branchInfo.clusters.includes(selectedCluster)) {
+        setSelectedCluster('ALL');
+      }
+    }
+  };
+
   // Calculate default Day of Week based on system time
   const getDefaultDay = (): DayOfWeek => {
     const dayMap: Record<number, DayOfWeek> = {
@@ -212,7 +224,7 @@ export default function App() {
                   {/* Filter Bar with Independent Branch and Cluster Dropdowns */}
                   <FilterBar
                     selectedBranch={selectedBranch}
-                    onSelectBranch={setSelectedBranch}
+                    onSelectBranch={handleSelectBranch}
                     selectedCluster={selectedCluster}
                     onSelectCluster={setSelectedCluster}
                     isDarkMode={isDarkMode}
@@ -343,7 +355,7 @@ export default function App() {
                 {/* Filter Bar with Independent Selectors */}
                 <FilterBar
                   selectedBranch={selectedBranch}
-                  onSelectBranch={setSelectedBranch}
+                  onSelectBranch={handleSelectBranch}
                   selectedCluster={selectedCluster}
                   onSelectCluster={setSelectedCluster}
                   isDarkMode={isDarkMode}
@@ -369,7 +381,7 @@ export default function App() {
         {currentTab === 'branches' && (
           <BranchesView
             onSelectBranch={(branch) => {
-              setSelectedBranch(branch);
+              handleSelectBranch(branch);
             }}
             onSelectCluster={(cluster) => {
               setSelectedCluster(cluster);
@@ -383,8 +395,12 @@ export default function App() {
         {currentTab === 'clusters' && (
           <ClustersView
             onSelectCluster={(cluster) => {
+              const branchInfo = BRANCH_OPTIONS.find((b) => b.clusters.includes(cluster));
+              if (branchInfo) {
+                setSelectedBranch(branchInfo.code);
+              }
               setSelectedCluster(cluster);
-              setSelectedBranch('ALL');
+              setCurrentTab('timetable');
             }}
             onNavigateToTimetable={() => setCurrentTab('timetable')}
             isDarkMode={isDarkMode}
@@ -401,8 +417,11 @@ export default function App() {
       <Footer
         onNavigate={setCurrentTab}
         onSelectCluster={(c) => {
+          const branchInfo = BRANCH_OPTIONS.find((b) => b.clusters.includes(c));
+          if (branchInfo) {
+            setSelectedBranch(branchInfo.code);
+          }
           setSelectedCluster(c);
-          setSelectedBranch('ALL');
           setCurrentTab('timetable');
         }}
         isDarkMode={isDarkMode}

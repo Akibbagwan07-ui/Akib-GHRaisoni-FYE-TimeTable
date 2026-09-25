@@ -37,7 +37,7 @@ export const TimetableGrid: React.FC<TimetableGridProps> = ({
 
   // Combine entries and ensure Lunch block is present at 12:45 - 01:30
   const combinedEntriesWithLunch = useMemo(() => {
-    if (selectedDay === 'Saturday' || entries.length === 0) {
+    if (entries.length === 0) {
       return entries;
     }
 
