@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>G H Raisoni College Timetable Portal</title>
+    <meta name="description" content="Official First Year Engineering (Semester-I, 2026-27) Master Timetable Portal for G H Raisoni College of Engineering and Management, Jalgaon." />
+    <meta property="og:title" content="G H Raisoni College Timetable Portal" />
+    <meta property="og:description" content="Official First Year Engineering (Semester-I, 2026-27) Master Timetable Portal for G H Raisoni College of Engineering and Management, Jalgaon." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Progressive Web App (PWA) Meta & Icons -->
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="FYE TimeTable" />
+    <link rel="apple-touch-icon" href="/Akib-GHRaisoni-FYE-TimeTable/apple-touch-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/Akib-GHRaisoni-FYE-TimeTable/icon.svg" />
+    <link rel="icon" type="image/png" href="/Akib-GHRaisoni-FYE-TimeTable/favicon.png" />
+    <link rel="manifest" href="/Akib-GHRaisoni-FYE-TimeTable/manifest.webmanifest" />
+    <link rel="alternate" type="application/manifest+json" href="/Akib-GHRaisoni-FYE-TimeTable/manifest.json" />
+
+    <!-- Service Worker Registration for PWA Compliance & PWABuilder -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker
+            .register('/Akib-GHRaisoni-FYE-TimeTable/sw.js', { scope: '/Akib-GHRaisoni-FYE-TimeTable/' })
+            .then(function (registration) {
+              console.log('[PWA] Service Worker registered successfully with scope:', registration.scope);
+            })
+            .catch(function (error) {
+              console.error('[PWA] Service Worker registration failed:', error);
+            });
+        });
+      }
+    </script>
+    <script type="module" crossorigin src="/Akib-GHRaisoni-FYE-TimeTable/assets/index-DE7-MbOX.js"></script>
+    <link rel="stylesheet" crossorigin href="/Akib-GHRaisoni-FYE-TimeTable/assets/index-m7al1nGt.css">
+  <link rel="manifest" href="/Akib-GHRaisoni-FYE-TimeTable/manifest.webmanifest"></head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

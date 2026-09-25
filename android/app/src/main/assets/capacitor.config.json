@@ -1,0 +1,8 @@
+{
+	"appId": "com.akibbagwan07.ghraisonitimtable",
+	"appName": "G H Raisoni Timetable",
+	"webDir": "dist",
+	"server": {
+		"androidScheme": "https"
+	}
+}

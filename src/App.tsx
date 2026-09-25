@@ -12,6 +12,8 @@ import { ClustersView } from './components/ClustersView';
 import { AboutView } from './components/AboutView';
 import { PrintModal } from './components/PrintModal';
 import { Footer } from './components/Footer';
+import { OfflineIndicator } from './components/OfflineIndicator';
+import { PWAInstallBanner } from './components/PWAInstallBanner';
 
 import { DayOfWeek, TimetableEntry } from './types';
 import {
@@ -150,6 +152,9 @@ export default function App() {
 
       {/* Main Container Content */}
       <main className="flex-1">
+        {/* PWA Install Banner for Mobile / Android */}
+        <PWAInstallBanner isDarkMode={isDarkMode} />
+
         {/* TAB 1: HOME */}
         {currentTab === 'home' && (
           <div>
@@ -433,6 +438,9 @@ export default function App() {
         onClose={() => setIsPrintModalOpen(false)}
         selectedCluster={selectedCluster}
       />
+
+      {/* Offline Mode Status Indicator */}
+      <OfflineIndicator />
     </div>
   );
 }

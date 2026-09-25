@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, X, Sun, Moon, GraduationCap, Calendar, Compass, Layers, Info } from 'lucide-react';
+import { PWAInstallButton } from './PWAInstallButton';
 
 interface HeaderProps {
   currentTab: 'home' | 'timetable' | 'branches' | 'clusters' | 'about';
@@ -96,8 +97,11 @@ export const Header: React.FC<HeaderProps> = ({
             })}
           </nav>
 
-          {/* Actions: Theme toggle & Mobile menu button */}
-          <div className="flex items-center gap-2.5">
+          {/* Actions: Install App, Theme toggle & Mobile menu button */}
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            {/* In-App PWA Install Button */}
+            <PWAInstallButton variant="header" isDarkMode={isDarkMode} />
+
             {/* Dark / Light Toggle */}
             <button
               id="theme-toggle-btn"
@@ -159,6 +163,9 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
             );
           })}
+          <div className="pt-2">
+            <PWAInstallButton variant="compact" isDarkMode={isDarkMode} />
+          </div>
         </div>
       )}
     </header>

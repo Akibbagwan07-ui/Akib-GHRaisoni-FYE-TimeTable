@@ -1,0 +1,50 @@
+{
+  "name": "GH Raisoni FYE TimeTable",
+  "short_name": "FYE TimeTable",
+  "description": "G H Raisoni College First Year Engineering Timetable",
+  "start_url": "/Akib-GHRaisoni-FYE-TimeTable/",
+  "scope": "/Akib-GHRaisoni-FYE-TimeTable/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/Akib-GHRaisoni-FYE-TimeTable/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/Akib-GHRaisoni-FYE-TimeTable/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "pwa-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/Akib-GHRaisoni-FYE-TimeTable/pwa-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

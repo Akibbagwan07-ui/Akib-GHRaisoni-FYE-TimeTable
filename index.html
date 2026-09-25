@@ -9,10 +9,37 @@
     <meta property="og:description" content="Official First Year Engineering (Semester-I, 2026-27) Master Timetable Portal for G H Raisoni College of Engineering and Management, Jalgaon." />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Progressive Web App (PWA) Meta & Icons -->
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="FYE TimeTable" />
+    <link rel="apple-touch-icon" href="%BASE_URL%apple-touch-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%icon.svg" />
+    <link rel="icon" type="image/png" href="%BASE_URL%favicon.png" />
+    <link rel="manifest" href="%BASE_URL%manifest.webmanifest" />
+    <link rel="alternate" type="application/manifest+json" href="%BASE_URL%manifest.json" />
+
+    <!-- Service Worker Registration for PWA Compliance & PWABuilder -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker
+            .register('%BASE_URL%sw.js', { scope: '%BASE_URL%' })
+            .then(function (registration) {
+              console.log('[PWA] Service Worker registered successfully with scope:', registration.scope);
+            })
+            .catch(function (error) {
+              console.error('[PWA] Service Worker registration failed:', error);
+            });
+        });
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

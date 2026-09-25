@@ -1,5 +1,6 @@
 import React from 'react';
 import { Calendar, Compass, Clock, CheckCircle2, Award, Sparkles } from 'lucide-react';
+import { PWAInstallButton } from './PWAInstallButton';
 
 interface HeroProps {
   onViewTimetable: () => void;
@@ -76,6 +77,7 @@ export const Hero: React.FC<HeroProps> = ({
             <Compass className="w-4 h-4 text-yellow-400" />
             Explore Clusters
           </button>
+          <PWAInstallButton variant="hero" isDarkMode={isDarkMode} />
         </div>
 
         {/* Quick Statistics Grid */}
